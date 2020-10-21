@@ -1,86 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Seeder;
 
-use App\Todo;
-use Illuminate\Http\Request;
-
-class TodoController extends Controller
+class TodoTableSeeder extends Seeder
 {
     /**
-     * Display a listing of the resource.
+     * Run the database seeds.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function run()
     {
-        $todo_list = Todo::all();
-        return view('todo/index', compact('todo_list'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        for($i = 1; $i <= 100; $i++){
+            DB::table('todos')->insert([
+                'title' => "タスク$i",
+                'due_date' => date('Y-m-d'),
+                'status' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+        }
     }
 }
